@@ -16,7 +16,7 @@ import java.util.Map;
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
-public class Pessoa {
+public class Person {
     private final ObjectMapper objectMapper = new ObjectMapper();
 
     @Id
