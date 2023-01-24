@@ -1,4 +1,4 @@
-package test.jsonb.models;
+package test.jsonb.domain.models;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import jakarta.persistence.Convert;
@@ -8,7 +8,6 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import test.jsonb.models.HashMapConverter;
 
 import java.util.Map;
 

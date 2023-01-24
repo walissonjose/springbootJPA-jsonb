@@ -76,41 +76,4 @@
 		</plugins>
 	</build>
 
-	<url>https://hibernate.org/orm</url>
-	<organization>
-		<name>Hibernate.org</name>
-		<url>https://hibernate.org</url>
-	</organization>
-	<licenses>
-		<license>
-			<name>GNU Library General Public License v2.1 or later</name>
-			<url>https://www.opensource.org/licenses/LGPL-2.1</url>
-			<distribution>repo</distribution>
-			<comments>See discussion at https://hibernate.org/community/license/ for more details.</comments>
-		</license>
-	</licenses>
-	<developers>
-		<developer>
-			<id>hibernate-team</id>
-			<name>The Hibernate Development Team</name>
-			<organization>Hibernate.org</organization>
-			<organizationUrl>https://hibernate.org</organizationUrl>
-		</developer>
-	</developers>
-	<scm>
-		<connection>scm:git:https://github.com/hibernate/hibernate-orm.git</connection>
-		<developerConnection>scm:git:git@github.com:hibernate/hibernate-orm.git</developerConnection>
-		<url>https://github.com/hibernate/hibernate-orm</url>
-	</scm>
-	<issueManagement>
-		<system>jira</system>
-		<url>https://hibernate.atlassian.net/browse/HHH</url>
-	</issueManagement>
-	<distributionManagement>
-		<relocation>
-			<groupId>org.hibernate.orm</groupId>
-			<artifactId>hibernate-core</artifactId>
-			<version>6.2.0.CR1</version>
-		</relocation>
-	</distributionManagement>
 </project>

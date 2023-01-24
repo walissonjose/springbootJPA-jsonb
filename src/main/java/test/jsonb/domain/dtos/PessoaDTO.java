@@ -1,4 +1,4 @@
-package test.jsonb.dtos;
+package test.jsonb.domain.dtos;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;

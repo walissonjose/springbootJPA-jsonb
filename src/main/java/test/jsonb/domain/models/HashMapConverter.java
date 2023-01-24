@@ -1,4 +1,4 @@
-package test.jsonb.models;
+package test.jsonb.domain.models;
 
 
 import com.fasterxml.jackson.core.JsonProcessingException;
