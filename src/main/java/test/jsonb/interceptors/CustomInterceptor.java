@@ -1,22 +1,26 @@
 package test.jsonb.interceptors;
 
 
-import org.hibernate.EmptyInterceptor;
+import org.hibernate.CallbackException;
+import org.hibernate.Interceptor;
 import org.hibernate.type.Type;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import test.jsonb.interceptors.entity.User;
+import test.jsonb.interceptors.entity.Information;
 
-import java.io.Serializable;
-
-public class CustomInterceptor extends EmptyInterceptor {
+public class CustomInterceptor implements Interceptor {
     private static final Logger logger = LoggerFactory.getLogger(CustomInterceptor.class);
 
     @Override
-    public boolean onSave(Object entity, Serializable id, Object[] state, String[] propertyNames, Type[] types) {
-        if(entity instanceof User) {
+    public boolean onSave(Object entity, Object id, Object[] state, String[] propertyNames, Type[] types) throws CallbackException {
+        if (entity instanceof Information) {
             logger.debug(entity.toString());
         }
-        return super.onSave(entity, id, state, propertyNames, types);
+        return Interceptor.super.onSave(entity, id, state, propertyNames, types);
     }
+
+
+
 }
+
+

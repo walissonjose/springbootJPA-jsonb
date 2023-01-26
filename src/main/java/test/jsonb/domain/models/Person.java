@@ -37,10 +37,13 @@ public class Person {
     private Map<String, Object> additionalInformation;
 
     private final ObjectMapper objectMapper = new ObjectMapper();
+
+    //serialize method that convert Attributes into JSON String
     public void serializePersonAttributes() throws JsonProcessingException {
         this.additionalInformationJSON = objectMapper.writeValueAsString(additionalInformation);
 
     }
+    //deserialize method that deserialize the JSON String back into a HashMap object
     public void deserializePersonAttributes() throws IOException {
         this.additionalInformation = objectMapper.readValue(additionalInformationJSON, new TypeReference<Map<String, Object>>() {
         });
