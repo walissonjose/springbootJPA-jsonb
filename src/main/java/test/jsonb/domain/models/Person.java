@@ -1,5 +1,7 @@
 package test.jsonb.domain.models;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import jakarta.persistence.Convert;
 import jakarta.persistence.Entity;
@@ -11,6 +13,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.hibernate.annotations.GenericGenerator;
 
+import java.io.IOException;
 import java.util.Map;
 import java.util.UUID;
 
@@ -20,7 +23,7 @@ import java.util.UUID;
 @AllArgsConstructor
 @NoArgsConstructor
 public class Person {
-    private final ObjectMapper objectMapper = new ObjectMapper();
+
 
     @Id
     @GeneratedValue(generator = "UUID")
@@ -32,5 +35,17 @@ public class Person {
 
     @Convert(converter = HashMapConverter.class)
     private Map<String, Object> additionalInformation;
+
+    private final ObjectMapper objectMapper = new ObjectMapper();
+    public void serializePersonAttributes() throws JsonProcessingException {
+        this.additionalInformationJSON = objectMapper.writeValueAsString(additionalInformation);
+
+    }
+    public void deserializePersonAttributes() throws IOException {
+        this.additionalInformation = objectMapper.readValue(additionalInformationJSON, new TypeReference<Map<String, Object>>() {
+        });
+    }
+
+
 
 }
