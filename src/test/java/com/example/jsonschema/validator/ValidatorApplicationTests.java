@@ -1,10 +1,10 @@
-package test.jsonb;
+package com.example.jsonschema.validator;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 
 @SpringBootTest
-class JsonbApplicationTests {
+class ValidatorApplicationTests {
 
 	@Test
 	void contextLoads() {
