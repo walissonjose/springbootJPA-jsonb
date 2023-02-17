@@ -1,5 +1,6 @@
 package com.example.jsonschema.validator;
 
+import com.example.jsonschema.validator.configs.EnviromentVariablesListener;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
@@ -7,7 +8,9 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 public class ValidatorApplication {
 
 	public static void main(String[] args) {
-		SpringApplication.run(ValidatorApplication.class, args);
+		SpringApplication application = new SpringApplication(ValidatorApplication.class);
+		application.addListeners(new EnviromentVariablesListener());
+		application.run(args);
 	}
 
 }

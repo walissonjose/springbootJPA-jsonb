@@ -9,9 +9,8 @@ import lombok.NoArgsConstructor;
 
 import java.util.UUID;
 
-
-@Builder
 @Data
+@Builder
 @AllArgsConstructor
 @NoArgsConstructor
 public class PersonMusicsDTO {
@@ -22,4 +21,5 @@ public class PersonMusicsDTO {
     private String personName;
     @Schema(description = "Lista de músicas favoritas de um individuo")
     private JsonNode listMusics;
+
 }

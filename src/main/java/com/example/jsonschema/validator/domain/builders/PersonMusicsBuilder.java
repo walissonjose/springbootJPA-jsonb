@@ -1,40 +1,33 @@
 package com.example.jsonschema.validator.domain.builders;
 
+import com.example.jsonschema.validator.domain.dtos.PersonMusicsDTO;
+import com.example.jsonschema.validator.domain.inputs.PersonMusicsInput;
 import com.example.jsonschema.validator.domain.models.PersonMusics;
 import com.fasterxml.jackson.databind.JsonNode;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import org.springframework.stereotype.Component;
 
+import java.io.IOException;
 import java.util.UUID;
 
+@Component
 public class PersonMusicsBuilder {
 
-    private UUID musicId;
-    private String personName;
-    private JsonNode listMusics;
-
-    public static PersonMusicsBuilder create() {
-        return new PersonMusicsBuilder();
-    }
-
-    public PersonMusicsBuilder withMusicId(UUID musicId) {
-        this.musicId = musicId;
-        return this;
-    }
-
-    public PersonMusicsBuilder withPersonName(String personName) {
-        this.personName = personName;
-        return this;
-    }
-
-    public PersonMusicsBuilder withListMusics(JsonNode listMusics) {
-        this.listMusics = listMusics;
-        return this;
-    }
-
-    public PersonMusics build() {
+    public static PersonMusics buildFromInput(PersonMusicsInput input) throws IOException {
+        ObjectMapper mapper = new ObjectMapper();
+        JsonNode jsonNode = mapper.readTree(input.getListMusics());
         return PersonMusics.builder()
-                .musicId(musicId)
-                .personName(personName)
-                .listMusics(listMusics)
+                .personName(input.getPersonName())
+                .listMusics(jsonNode)
                 .build();
     }
+
+    public static PersonMusicsDTO buildDtoFromModel(PersonMusics personMusics) throws IOException {
+        return PersonMusicsDTO.builder()
+                .musicId(personMusics.getMusicId())
+                .personName(personMusics.getPersonName())
+                .listMusics(personMusics.getListMusics())
+                .build();
+    }
+
 }

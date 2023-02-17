@@ -7,9 +7,9 @@ spring:
   application:
     name: validator
   datasource:
-    url: jdbc:postgresql://${POSTGRES_HOST:localhost}:${POSTGRES_PORT:5432}/${POSTGRES_DATABASE:nsweb}?ApplicationName=${spring.application.name}
+    url: jdbc:postgresql://${POSTGRES_HOST:172.17.0.2}:${POSTGRES_PORT:5432}/${POSTGRES_DATABASE:pessoa}?ApplicationName=${spring.application.name}
     username: ${POSTGRES_USERNAME:postgres}
-    password: ${POSTGRES_PASSWORD:postgres}
+    password: ${POSTGRES_PASSWORD:root}
     driver-class-name: org.postgresql.Driver
 
   jpa:
