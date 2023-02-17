@@ -1,5 +1,6 @@
 package com.example.jsonschema.validator.domain.dtos;
 
+import com.fasterxml.jackson.databind.JsonNode;
 import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -16,9 +17,9 @@ import java.util.UUID;
 public class PersonMusicsDTO {
 
     @Schema(description = "Identificador da pessoa")
-    private UUID pessoaId;
+    private UUID musicId;
     @Schema(description = "Nome da pessoa")
-    private String name;
+    private String personName;
     @Schema(description = "Lista de músicas favoritas de um individuo")
-    private String listMusic;
+    private JsonNode listMusics;
 }

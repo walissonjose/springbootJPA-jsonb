@@ -19,7 +19,7 @@ import java.util.UUID;
 @Entity
 @AllArgsConstructor
 @NoArgsConstructor
-@Table(name = "MUSICAS", schema = "pessoa")
+@Table(schema = "PESSOAS", name = "MUSICAS")
 @AttributeOverrides({
         @AttributeOverride(name = "musicId", column= @Column(name = "MUSI_SQ_MUSICAS")),
         @AttributeOverride(name = "personName", column = @Column(name = "MUSI_NM_NOME")),
@@ -29,10 +29,10 @@ import java.util.UUID;
 public class PersonMusics {
 
     @Id
-    @GeneratedValue(generator = "UUID")
+    @GeneratedValue(generator = "uuid2")
     @GenericGenerator(
-            name = "UUID",
-            strategy = "org.hibernate.UUIDGenerator"
+            name = "uuid2",
+            strategy = "uuid2"
     )
     @Column(name = "MUSI_SQ_MUSICAS", nullable = false, updatable = false)
     private UUID musicId;

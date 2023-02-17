@@ -5,7 +5,7 @@ server:
     context-path: /test/jsonb
 spring:
   application:
-    name: storage-service
+    name: validator
   datasource:
     url: jdbc:postgresql://${POSTGRES_HOST:localhost}:${POSTGRES_PORT:5432}/${POSTGRES_DATABASE:nsweb}?ApplicationName=${spring.application.name}
     username: ${POSTGRES_USERNAME:postgres}
@@ -16,15 +16,9 @@ spring:
     show-sql: false
     hibernate:
       ddl-auto: validate
-    properties:
-      org:
-        hibernate:
-          envers:
-            audit_table_prefix: AUDITORIA_
-            audit_table_suffix:
-            revision_field_name: AUDI_SQ_AUDITORIA
-            revision_type_field_name: AUDI_NR_AUDITORIA
-            default_schema: AUDITORIA
       hibernate:
-        default_schema: ARQUIVO
+        default_schema: PESSOAS
+        dialect: org.hibernate.dialect.PostgreSQLDialect
+    properties:
+      hibernate:
         dialect: org.hibernate.dialect.PostgreSQLDialect
