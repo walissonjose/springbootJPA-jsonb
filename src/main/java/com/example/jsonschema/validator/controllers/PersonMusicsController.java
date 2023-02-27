@@ -2,6 +2,7 @@ package com.example.jsonschema.validator.controllers;
 
 import com.example.jsonschema.validator.configs.ResourceNotFoundException;
 import com.example.jsonschema.validator.domain.dtos.PersonMusicsDTO;
+import com.example.jsonschema.validator.domain.inputs.PersonMusicsInput;
 import com.example.jsonschema.validator.services.PersonMusicsService;
 import com.fasterxml.jackson.databind.JsonNode;
 import io.swagger.v3.oas.annotations.Operation;
@@ -22,16 +23,16 @@ public class PersonMusicsController {
 
     private final PersonMusicsService service;
     @PostMapping("/create")
-    public ResponseEntity<PersonMusicsDTO> createPersonMusics(@RequestBody PersonMusicsDTO personMusicsDTO, HttpServletRequest request) {
-        PersonMusicsDTO createdPersonMusicsDTO = service.createPersonMusics(personMusicsDTO);
+    public ResponseEntity<PersonMusicsDTO> createPersonMusics(@RequestBody PersonMusicsInput personMusicsInput, HttpServletRequest request) {
+        PersonMusicsDTO createdPersonMusicsDTO = service.createPersonMusics(personMusicsInput);
         return ResponseEntity.created(URI.create(request.getRequestURI() + "/" + createdPersonMusicsDTO.getMusicId()))
                 .body(createdPersonMusicsDTO);
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<PersonMusicsDTO> updatePersonMusics(@PathVariable Long id, @RequestBody JsonNode jsonNode) {
+    public ResponseEntity<PersonMusicsDTO> updatePersonMusics(@PathVariable Long id, @RequestBody PersonMusicsInput personMusicsInput) {
         try {
-            PersonMusicsDTO updatedPersonMusics = service.updatePersonMusics(String.valueOf(id), jsonNode);
+            PersonMusicsDTO updatedPersonMusics = service.updatePersonMusics(String.valueOf(id), personMusicsInput);
             return ResponseEntity.ok(updatedPersonMusics);
         } catch (ResourceNotFoundException e) {
             return ResponseEntity.notFound().build();
