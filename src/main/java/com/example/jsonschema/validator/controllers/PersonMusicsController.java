@@ -47,4 +47,9 @@ public class PersonMusicsController {
     public ResponseEntity<List<PersonMusicsDTO>> searchJsonByKeyValue(@PathVariable String key, @PathVariable String value){
         return ResponseEntity.ok(PersonMusicsBuilder.buildList(service.searchByKeyValue(key, value)));
     }
+
+    @GetMapping("search/json/registry")
+    public ResponseEntity<List<PersonMusicsDTO>> searchJsonByRegistry(@RequestParam String key, @RequestParam String value){
+        return ResponseEntity.ok(PersonMusicsBuilder.buildList(service.searchByRegistry(key, value)));
+    }
 }
