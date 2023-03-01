@@ -1,6 +1,5 @@
 package com.example.jsonschema.validator.services;
 
-import com.example.jsonschema.validator.configs.ResourceNotFoundException;
 import com.example.jsonschema.validator.domain.builders.PersonMusicsBuilder;
 import com.example.jsonschema.validator.domain.dtos.PersonMusicsDTO;
 import com.example.jsonschema.validator.domain.inputs.PersonMusicsInput;
@@ -12,6 +11,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.io.IOException;
+import java.util.List;
 import java.util.UUID;
 
 @Slf4j
@@ -20,7 +20,6 @@ import java.util.UUID;
 public class PersonMusicsService {
 
     private final PersonMusicsRepository personMusicsRepository;
-    private final PersonMusicsBuilder personMusicsBuilder;
 
     public PersonMusicsDTO createPersonMusics(PersonMusicsInput personMusicsInput) {
         PersonMusics personMusics = PersonMusicsBuilder.buildFromInput(personMusicsInput);
@@ -33,14 +32,21 @@ public class PersonMusicsService {
     }
 
     public PersonMusicsDTO updatePersonMusics(String id, PersonMusicsInput updates) throws IOException {
-        PersonMusics personMusics = personMusicsRepository. findById(UUID.fromString(id))
-                .orElseThrow(() -> new ResourceNotFoundException("PersonMusics not found for id: " + id));
-
-        // Save updated PersonMusics to the database
-        PersonMusics updatedPersonMusics = personMusicsRepository.save(personMusics);
-
-        // Convert updated PersonMusics to DTO and return
-        return personMusicsBuilder.buildDtoFromModel(updatedPersonMusics);
+        return null;
     }
 
+    public PersonMusics findOneById(UUID id){
+        PersonMusics personMusics = personMusicsRepository.getReferenceById(id);
+        return personMusics;
+    }
+
+    public List<PersonMusics> findAll(){
+        List<PersonMusics> personMusicsList = personMusicsRepository.findAll();
+        return personMusicsList;
+    }
+
+    public List<PersonMusics> searchByKeyValue(String key, String value) {
+        List<PersonMusics> personMusicsList = personMusicsRepository.searchByKeyValue(key, value);
+        return personMusicsList;
+    }
 }

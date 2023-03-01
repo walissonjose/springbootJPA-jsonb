@@ -1,19 +1,18 @@
 package com.example.jsonschema.validator.controllers;
 
-import com.example.jsonschema.validator.configs.ResourceNotFoundException;
+import com.example.jsonschema.validator.domain.builders.PersonMusicsBuilder;
 import com.example.jsonschema.validator.domain.dtos.PersonMusicsDTO;
 import com.example.jsonschema.validator.domain.inputs.PersonMusicsInput;
 import com.example.jsonschema.validator.services.PersonMusicsService;
-import com.fasterxml.jackson.databind.JsonNode;
-import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
-import java.io.IOException;
 import java.net.URI;
+import java.util.List;
+import java.util.UUID;
 
 @Tag(name = "PersonMusics", description = "Endpoints relacionados a lista de músicas das Pessoas")
 @RestController
@@ -29,15 +28,23 @@ public class PersonMusicsController {
                 .body(createdPersonMusicsDTO);
     }
 
-    @PutMapping("/{id}")
-    public ResponseEntity<PersonMusicsDTO> updatePersonMusics(@PathVariable Long id, @RequestBody PersonMusicsInput personMusicsInput) {
-        try {
-            PersonMusicsDTO updatedPersonMusics = service.updatePersonMusics(String.valueOf(id), personMusicsInput);
-            return ResponseEntity.ok(updatedPersonMusics);
-        } catch (ResourceNotFoundException e) {
-            return ResponseEntity.notFound().build();
-        } catch (IOException e) {
-            throw new RuntimeException(e);
-        }
+    @PutMapping("/update/{id}")
+    public ResponseEntity<PersonMusicsDTO> updatePersonMusics(@PathVariable UUID id, @RequestBody PersonMusicsInput personMusicsInput) {
+        return null;
+    }
+
+    @GetMapping("/find/one/{id}")
+    public ResponseEntity<PersonMusicsDTO> findOneById(@PathVariable UUID id) {
+        return ResponseEntity.ok(PersonMusicsBuilder.buildDtoFromModel(service.findOneById(id)));
+    }
+
+    @GetMapping("/find/all")
+    public ResponseEntity<List<PersonMusicsDTO>> findAll(){
+        return ResponseEntity.ok(PersonMusicsBuilder.buildList(service.findAll()));
+    }
+
+    @GetMapping("search/json/{key}/{value}")
+    public ResponseEntity<List<PersonMusicsDTO>> searchJsonByKeyValue(@PathVariable String key, @PathVariable String value){
+        return ResponseEntity.ok(PersonMusicsBuilder.buildList(service.searchByKeyValue(key, value)));
     }
 }

@@ -1,11 +1,11 @@
 package com.example.jsonschema.validator.domain.inputs;
 
 
+import com.fasterxml.jackson.databind.JsonNode;
 import io.swagger.v3.oas.annotations.media.Schema;
-import javax.validation.constraints.NotBlank;
 import lombok.Data;
 
-import java.util.List;
+import javax.validation.constraints.NotBlank;
 
 @Data
 @Schema(description = "Representacao de entrada de uma pessoa e sua lista de musicas")
@@ -16,5 +16,5 @@ public class PersonMusicsInput {
     private String personName;
 
     @Schema(description = "Lista de musicas preferidas da pessoa.")
-    private List<String> listMusics;
+    private JsonNode listMusics;
 }

@@ -3,21 +3,19 @@ package com.example.jsonschema.validator.domain.builders;
 import com.example.jsonschema.validator.domain.dtos.PersonMusicsDTO;
 import com.example.jsonschema.validator.domain.inputs.PersonMusicsInput;
 import com.example.jsonschema.validator.domain.models.PersonMusics;
-import com.fasterxml.jackson.databind.ObjectMapper;
-import com.fasterxml.jackson.databind.node.ArrayNode;
 import org.springframework.stereotype.Component;
+
+import java.util.LinkedList;
+import java.util.List;
 
 
 @Component
 public class PersonMusicsBuilder {
 
     public static PersonMusics buildFromInput(PersonMusicsInput input) {
-        ObjectMapper object = new ObjectMapper();
-        ArrayNode arrayNode = object.createArrayNode();
-        input.getListMusics().forEach(music -> arrayNode.add(music));
         return PersonMusics.builder()
                 .personName(input.getPersonName())
-                .listMusics(arrayNode)
+                .listMusics(input.getListMusics())
                 .build();
     }
 
@@ -27,6 +25,15 @@ public class PersonMusicsBuilder {
                 .personName(personMusics.getPersonName())
                 .listMusics(personMusics.getListMusics())
                 .build();
+    }
+
+    public static List<PersonMusicsDTO> buildList(List<PersonMusics> personMusicsList){
+        List<PersonMusicsDTO> personMusicsDtosList = new LinkedList<>();
+        for (PersonMusics personMusics : personMusicsList){
+            PersonMusicsDTO personMusicsDTO = buildDtoFromModel(personMusics);
+            personMusicsDtosList.add(personMusicsDTO);
+        }
+        return personMusicsDtosList;
     }
 
 }

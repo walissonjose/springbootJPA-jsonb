@@ -38,7 +38,7 @@ public class PersonMusics {
     private UUID musicId;
     @Column(name = "MUSI_NM_NOME", nullable = false)
     private String personName;
-    @Type(type = "jsonb")
+    @Type(type = "json")
     @Column(name = "MUSI_TX_LISTMUSIC", columnDefinition = "jsonb", nullable = false)
     private JsonNode listMusics;
 
