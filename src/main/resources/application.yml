@@ -18,10 +18,10 @@ spring:
       ddl-auto: validate
       hibernate:
         default_schema: PESSOAS
-        dialect: org.hibernate.dialect.PostgreSQLDialect
+        dialect: org.hibernate.dialect.PostgreSQL82Dialect
     properties:
       hibernate:
-        dialect: org.hibernate.dialect.PostgreSQLDialect
+        dialect: org.hibernate.dialect.PostgreSQL82Dialect
 
 environment:
     postgres-host: ${POSTGRES_HOST:172.27.16.1}

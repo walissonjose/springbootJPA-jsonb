@@ -28,9 +28,9 @@ public class PersonMusicsController {
                 .body(createdPersonMusicsDTO);
     }
 
-    @PutMapping("/update/{id}")
-    public ResponseEntity<PersonMusicsDTO> updatePersonMusics(@PathVariable UUID id, @RequestBody PersonMusicsInput personMusicsInput) {
-        return null;
+    @PutMapping("/update/{id}/{key}/{value}")
+    public ResponseEntity<PersonMusicsDTO> updatePersonMusics(@PathVariable UUID id, @PathVariable String key, @PathVariable String value) {
+        return ResponseEntity.ok(PersonMusicsBuilder.buildDtoFromModel(service.addMusic(id, key, value)));
     }
 
     @GetMapping("/find/one/{id}")
@@ -48,8 +48,13 @@ public class PersonMusicsController {
         return ResponseEntity.ok(PersonMusicsBuilder.buildList(service.searchByKeyValue(key, value)));
     }
 
-    @GetMapping("search/json/registry")
-    public ResponseEntity<List<PersonMusicsDTO>> searchJsonByRegistry(@RequestParam String key, @RequestParam String value){
-        return ResponseEntity.ok(PersonMusicsBuilder.buildList(service.searchByRegistry(key, value)));
+    @GetMapping("search/json_in_list/{key}/{value}")
+    public ResponseEntity<List<PersonMusicsDTO>> searchJsonByKeyValueInList(@PathVariable String key, @PathVariable String value){
+        return ResponseEntity.ok(PersonMusicsBuilder.buildList(service.searchByKeyValueInList(key, value)));
     }
+
+//    @GetMapping("search/json/registry")
+//    public ResponseEntity<List<PersonMusicsDTO>> searchJsonByRegistry(@RequestParam String key, @RequestParam String value){
+//        return ResponseEntity.ok(PersonMusicsBuilder.buildList(service.searchByRegistry(key, value)));
+//    }
 }
