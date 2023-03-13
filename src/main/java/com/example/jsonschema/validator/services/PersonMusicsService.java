@@ -5,6 +5,7 @@ import com.example.jsonschema.validator.domain.dtos.PersonMusicsDTO;
 import com.example.jsonschema.validator.domain.inputs.PersonMusicsInput;
 import com.example.jsonschema.validator.domain.models.PersonMusics;
 import com.example.jsonschema.validator.repositories.PersonMusicsRepository;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,8 +19,9 @@ import java.util.UUID;
 @RequiredArgsConstructor(onConstructor = @__(@Autowired))
 @Service
 public class PersonMusicsService {
-
     private final PersonMusicsRepository personMusicsRepository;
+    private final ObjectMapper objectMapper = new ObjectMapper();
+
 
     public PersonMusicsDTO createPersonMusics(PersonMusicsInput personMusicsInput) {
         PersonMusics personMusics = PersonMusicsBuilder.buildFromInput(personMusicsInput);
@@ -50,29 +52,20 @@ public class PersonMusicsService {
         return personMusicsList;
     }
 
-    public List<PersonMusics> searchByKeyValueInList (String key, String value){
-        List<PersonMusics> personMusicsList = personMusicsRepository.searchByKeyValueInList(key, value);
+    public List<PersonMusics> searchByKeyValueInList (String query) {
+        List<PersonMusics> personMusicsList = personMusicsRepository.searchByKeyValueInList(query);
         return personMusicsList;
     }
 
-//    public List<PersonMusics> searchByRegistry(String key, String value){
-//        Specification<PersonMusics> specification = (root, query, cb) -> {
-//            Path<String> jsonPath = root.get("listMusics"); // obter o caminho para o campo JSON
-//            Expression<String> jsonNodeExpression = cb.function("json_extract_path_text", String.class, jsonPath, cb.literal(key)); // criar uma expressão para extrair o valor da chave especificada
-//            return cb.equal(jsonNodeExpression, value);
-//        };
-//        List<PersonMusics> personMusicsList = personMusicsRepository.findAll(specification);
-//        return personMusicsList;
-//    }
 
-    public PersonMusics addMusic(UUID id, String key, String value) {
-//        List<String> formatKeyNode = new LinkedList<>();
-//        formatKeyNode.add(key);
-        String formatKeyNode = "{"+key+"}";
-        String formatValue = value;
-        personMusicsRepository.addMusic(id, formatKeyNode, formatValue);
-        PersonMusics personMusics = personMusicsRepository.getReferenceById(id);
-        return personMusics;
-    }
+//    public PersonMusics addMusic(UUID id, String key, String value) {
+////        List<String> formatKeyNode = new LinkedList<>();
+////        formatKeyNode.add(key);
+//        String formatKeyNode = "{"+key+"}";
+//        String formatValue = value;
+//        personMusicsRepository.addMusic(id, formatKeyNode, formatValue);
+//        PersonMusics personMusics = personMusicsRepository.getReferenceById(id);
+//        return personMusics;
+//    }
 
 }
