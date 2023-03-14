@@ -8,7 +8,6 @@ import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-
 import javax.servlet.http.HttpServletRequest;
 import java.net.URI;
 import java.util.List;
@@ -27,11 +26,6 @@ public class PersonMusicsController {
         return ResponseEntity.created(URI.create(request.getRequestURI() + "/" + createdPersonMusicsDTO.getMusicId()))
                 .body(createdPersonMusicsDTO);
     }
-
-//    @PutMapping("/update/{id}/{key}/{value}")
-//    public ResponseEntity<PersonMusicsDTO> updatePersonMusics(@PathVariable UUID id, @PathVariable String key, @PathVariable String value) {
-//        return ResponseEntity.ok(PersonMusicsBuilder.buildDtoFromModel(service.addMusic(id, key, value)));
-//    }
 
     @GetMapping("/find/one/{id}")
     public ResponseEntity<PersonMusicsDTO> findOneById(@PathVariable UUID id) {

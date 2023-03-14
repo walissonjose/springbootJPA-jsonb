@@ -1,0 +1,17 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "type": "object",
+  "properties": {
+    "personName": {
+      "type": "string"
+    },
+    "listMusics": {
+      "type": "object",
+      "additionalProperties": {
+        "type": "string"
+      },
+      "minProperties": 1
+    }
+  },
+  "required": ["personName", "listMusics"]
+}

@@ -5,7 +5,6 @@ import com.example.jsonschema.validator.domain.dtos.PersonMusicsDTO;
 import com.example.jsonschema.validator.domain.inputs.PersonMusicsInput;
 import com.example.jsonschema.validator.domain.models.PersonMusics;
 import com.example.jsonschema.validator.repositories.PersonMusicsRepository;
-import com.fasterxml.jackson.databind.ObjectMapper;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,7 +19,6 @@ import java.util.UUID;
 @Service
 public class PersonMusicsService {
     private final PersonMusicsRepository personMusicsRepository;
-    private final ObjectMapper objectMapper = new ObjectMapper();
 
 
     public PersonMusicsDTO createPersonMusics(PersonMusicsInput personMusicsInput) {
@@ -56,16 +54,5 @@ public class PersonMusicsService {
         List<PersonMusics> personMusicsList = personMusicsRepository.searchByKeyValueInList(query);
         return personMusicsList;
     }
-
-
-//    public PersonMusics addMusic(UUID id, String key, String value) {
-////        List<String> formatKeyNode = new LinkedList<>();
-////        formatKeyNode.add(key);
-//        String formatKeyNode = "{"+key+"}";
-//        String formatValue = value;
-//        personMusicsRepository.addMusic(id, formatKeyNode, formatValue);
-//        PersonMusics personMusics = personMusicsRepository.getReferenceById(id);
-//        return personMusics;
-//    }
 
 }
