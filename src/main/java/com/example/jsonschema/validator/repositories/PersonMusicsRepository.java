@@ -20,8 +20,4 @@ public interface PersonMusicsRepository extends JpaRepository<PersonMusics, UUID
                    "WHERE musi_tx_listmusic @> CAST(?1 AS jsonb)", nativeQuery = true)
     public List<PersonMusics> searchByKeyValueInList(String query);
 
-//    @Query(value = "UPDATE pessoa.musicas SET musi_tx_listmusic = jsonb_set(musi_tx_listmusic, :key, :value, true) " +
-//            "WHERE musi_sq_musicas = :id", nativeQuery = true)
-//    public PersonMusics addMusic(@Param("id") UUID id, @Param("key") String key, @Param("value") String value);
-
 }

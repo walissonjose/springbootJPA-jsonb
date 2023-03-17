@@ -1,11 +1,13 @@
 {
   "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "Person Musics",
+  "description": "A list of some Musics from repertory of a person",
   "type": "object",
   "properties": {
-    "personName": {
+      "personName": {
       "type": "string"
     },
-    "listMusics": {
+      "listMusics": {
       "type": "object",
       "additionalProperties": {
         "type": "string"

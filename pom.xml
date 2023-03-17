@@ -107,9 +107,11 @@
 			<version>2.21.1</version>
 		</dependency>
 
+		<!-- https://mvnrepository.com/artifact/com.github.java-json-tools/json-schema-validator -->
 		<dependency>
-			<groupId>org.springframework.boot</groupId>
-			<artifactId>spring-boot-starter-validation</artifactId>
+			<groupId>com.github.java-json-tools</groupId>
+			<artifactId>json-schema-validator</artifactId>
+			<version>2.2.14</version>
 		</dependency>
 
 	</dependencies>
