@@ -11,6 +11,10 @@ spring:
     username: ${POSTGRES_USERNAME:postgres}
     password: ${POSTGRES_PASSWORD:root}
     driver-class-name: org.postgresql.Driver
+  mvc:
+    json:
+      schema:
+        location: classpath:/schema/
 
   jpa:
     show-sql: false

@@ -7,8 +7,11 @@ import com.example.jsonschema.validator.services.PersonMusicsService;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
+
 import javax.servlet.http.HttpServletRequest;
+import javax.validation.Valid;
 import java.net.URI;
 import java.util.List;
 import java.util.UUID;
@@ -17,11 +20,12 @@ import java.util.UUID;
 @RestController
 @RequestMapping("/api/person-musics")
 @RequiredArgsConstructor
+@Validated
 public class PersonMusicsController {
 
     private final PersonMusicsService service;
     @PostMapping("/create")
-    public ResponseEntity<PersonMusicsDTO> createPersonMusics(@RequestBody PersonMusicsInput personMusicsInput, HttpServletRequest request) {
+    public ResponseEntity<PersonMusicsDTO> createPersonMusics(@RequestBody @Valid PersonMusicsInput personMusicsInput, HttpServletRequest request) {
         PersonMusicsDTO createdPersonMusicsDTO = service.createPersonMusics(personMusicsInput);
         return ResponseEntity.created(URI.create(request.getRequestURI() + "/" + createdPersonMusicsDTO.getMusicId()))
                 .body(createdPersonMusicsDTO);
