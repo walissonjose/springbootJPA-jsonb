@@ -4,8 +4,12 @@ import com.example.jsonschema.validator.domain.builders.PersonMusicsBuilder;
 import com.example.jsonschema.validator.domain.dtos.PersonMusicsDTO;
 import com.example.jsonschema.validator.domain.inputs.PersonMusicsInput;
 import com.example.jsonschema.validator.services.PersonMusicsService;
+import com.example.jsonschema.validator.validator.Validator;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.github.fge.jsonschema.core.exceptions.ProcessingException;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.RequiredArgsConstructor;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
@@ -23,9 +27,12 @@ import java.util.UUID;
 @Validated
 public class PersonMusicsController {
 
+    @Autowired
+    private Validator validator;
     private final PersonMusicsService service;
     @PostMapping("/create")
-    public ResponseEntity<PersonMusicsDTO> createPersonMusics(@RequestBody @Valid PersonMusicsInput personMusicsInput, HttpServletRequest request) {
+    public ResponseEntity<PersonMusicsDTO> createPersonMusics(@RequestBody @Valid PersonMusicsInput personMusicsInput, HttpServletRequest request) throws ProcessingException {
+        validator.validate(personMusicsInput);
         PersonMusicsDTO createdPersonMusicsDTO = service.createPersonMusics(personMusicsInput);
         return ResponseEntity.created(URI.create(request.getRequestURI() + "/" + createdPersonMusicsDTO.getMusicId()))
                 .body(createdPersonMusicsDTO);

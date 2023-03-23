@@ -1,5 +1,6 @@
-package br.ufal.lccv.java.springboot.crud.crudprograd.config;
+package com.example.jsonschema.validator.configs;
 
+import com.github.fge.jsonschema.core.exceptions.ProcessingException;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ExceptionHandler;
@@ -7,6 +8,7 @@ import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
 
 import javax.persistence.EntityNotFoundException;
+import java.io.IOException;
 import java.util.LinkedList;
 import java.util.List;
 
@@ -33,6 +35,23 @@ public class ExceptionHandlerConfig {
             errors.add(error.getDefaultMessage());
         });
         return errors;
+    }
+    @ExceptionHandler(IllegalArgumentException.class)
+    public String handleIllegalArgumentException(IllegalArgumentException ex) {
+        String errorMessage = "Invalid input: " + ex.getMessage();
+        return errorMessage;
+    }
+
+    @ExceptionHandler(IOException.class)
+    public String handleIOException(IOException ex) {
+        String error = ex.getMessage();
+        return "Erro ao ler o arquivo: " + error;
+    }
+
+    @ExceptionHandler(ProcessingException.class)
+    public String handleProcessingException(ProcessingException ex) {
+        String error = ex.getMessage();
+        return "Erro ao processar o esquema JSON: "+ error;
     }
 }
 

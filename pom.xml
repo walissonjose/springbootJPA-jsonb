@@ -107,7 +107,6 @@
 			<version>2.21.1</version>
 		</dependency>
 
-		<!-- https://mvnrepository.com/artifact/com.github.java-json-tools/json-schema-validator -->
 		<dependency>
 			<groupId>com.github.java-json-tools</groupId>
 			<artifactId>json-schema-validator</artifactId>
